@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--  Font Awesome  -->
+  <script src="https://kit.fontawesome.com/31370fad5f.js" crossorigin="anonymous"></script>
+  <!--  CSS  -->
+  <link rel="stylesheet" href="css/style5.css">
+  <!--  Google Fonts  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <!-- Scripts -->
+  <!-- <script src="js/app.js" defer></script> -->
+  <!-- Title -->
+  <title>IKA-WAR</title>
+</head>
+<body>
+  
+  <div class="war-contenedor">
+    <div class="descripcion">
+      <h1>Ika-WAR</h1>
+      <p>Calcule dinámicamente los costos de sus ejércitos.</p>
+      <p>Rellene las tablas de unidades terrestres y navales con la cantidad que desee calcular.</p>
+      <p>Puede ajustar los campos de Navegación, Milicia, Reductores y Gobierno.</p>
+      <p>Puede ingresar sus datos de producción, número de ciudadanos y reserva de oro para ver el tiempo de recolección de materias y ciudadanos necesario, y la autonomía en horas, días y semanas.</p>
+    </div>
+    <div class="contenedor-chachi">
+      <div class="flex reductores-navegacion anchoFijo">
+        <h4>Navegación</h4>
+        <label for="mantenimiento_de_barcos"> <input type="checkbox" id="mantenimiento_de_barcos" onclick="calculo()" checked> Man. de barcos</label>
+        <label for="brea"><input type="checkbox" id="brea" onclick="calculo()" checked> Brea</label>
+        <label for="cartas_de_navegacion"><input type="checkbox" id="cartas_de_navegacion" onclick="calculo()" checked> Cartas de navegación</label>
+        <label for="futuroN"><input class="largo" type="number" min="0" max="25" id="futuroN" oninput="calculo()" value="25"> Nivel de futuro</label>
+      </div>
+      <div class="flex reductores-milicia anchoFijo">
+        <h4>Milicia</h4>
+        <label for="cartografia"><input type="checkbox" id="cartografia" onclick="calculo()" checked> Cartografía</label>
+        <label for="codigoDeHonor"><input type="checkbox" id="codigoDeHonor" onclick="calculo()" checked> Código de Honor</label>
+        <label for="logistica"><input type="checkbox" id="logistica" onclick="calculo()" checked> Logística</label>
+        <label for="futuroT"><input class="largo" type="number" min="0" max="25" id="futuroT" onclick="calculo()" value="25"> Nivel de futuro</label>
+      </div>   
+      <div class="flex reductores-edificios anchoFijo">
+        <h4>Reductores</h4>
+        <label for="carpinteria"><input class="largo" class="inp_edi" type="number" min="0" max="50" id="carpinteria" oninput="calculo()" placeholder="Nivel de" value="50"> Carpintería</label>
+        <label for="vinyedo"><input class="largo" class="inp_edi" type="number" min="0" max="50" id="vinyedo" oninput="calculo()" placeholder="Nivel de" value="50"> Prensa de Vino</label>
+        <label for="optico"><input class="largo" class="inp_edi" type="number" min="0" max="50" id="optico" oninput="calculo()" placeholder="Nivel de" value="50"> Óptico</label>
+        <label for="area"><input class="largo" class="inp_edi" type="number" min="0" max="50" id="area" oninput="calculo()" placeholder="Nivel de" value="50"> Área pirotécnica</label>
+      </div>
+      <div class="flex reductores-gobierno anchoFijo">
+        <h4>Gobiernos</h4>
+        <label for="dictadura"><input type="checkbox" name="gobierno" id="dictadura" onclick="calculo()"> Dictadura</label>
+        <label for="oligarquia"><input type="checkbox" name="gobierno" id="oligarquia" onclick="calculo()"> Oligarquía</label>
+      </div>
+      <div class="flex produccion-propia anchoFijo">
+        <h4>Tu producción</h4>
+        <label for="pro-madera"><input class="largoXL" class="inp_edi" type="number" min="0" max="10000000" id="pro-madera" oninput="calculo()" placeholder="Tu producción"> /h. Madera</label>
+        <label for="pro-vino"><input class="largoXL" class="inp_edi" type="number" min="0" max="10000000" id="pro-vino" oninput="calculo()" placeholder="Tu producción"> /h. Vino</label>
+        <label for="pro-azufre"><input class="largoXL" class="inp_edi" type="number" min="0" max="10000000" id="pro-azufre" oninput="calculo()" placeholder="Tu producción"> /h. Azufre</label>
+        <label for="pro-cristal"><input class="largoXL" class="inp_edi" type="number" min="0" max="10000000" id="pro-cristal" oninput="calculo()" placeholder="Tu producción"> /h. Cristal</label>
+        <label for="pro-ciudadanos"><input class="largoXL" class="inp_edi" type="number" min="0" max="10000000" id="pro-ciudadanos" oninput="calculo()" placeholder="Total ciudadanos"> Ciudadanos</label>
+        <label for="cantidad-oro"><input class="largoXL" class="inp_edi" type="number" min="0" max="10000000" id="cantidad-oro" oninput="calculo()" placeholder="Tu reserva de oro"> Oro total</label>
+      </div>
+    </div>
+
+    <div class="contenedor-tablas">
+      <div id="tabla1" class="tabla">
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-hondero" title="Hondero"></div>
+            <input type="number" title="Hondero"  id="hondero" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-arquero" title="Arquero"></div>
+            <input type="number" title="Arquero" id="arquero" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-fusilero" title="Fusilero"></div>
+            <input type="number" title="Fusilero" id="fusilero" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-lancero" title="Lancero"></div>
+            <input type="number" title="Lancero" id="lancero" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-espadachin" title="Espadachín"></div>
+            <input type="number" title="Espadachín" id="espadachin" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-hoplita" title="Hoplita"></div>
+            <input type="number" title="Hoplita" id="hoplita" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-gigante" title="Gigante a vapor"></div>
+            <input type="number" title="Gigante a vapor" id="gigante" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-girocoptero" title="Girocóptero"></div>
+            <input type="number" title="Girocóptero" id="girocoptero" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-globo" title="Globo Bombardero"></div>
+            <input type="number" title="Globo Bombardero" id="globo" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-ariete" title="Ariete"></div>
+            <input type="number" title="Ariete" id="ariete" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-catapulta" title="Catapulta"></div>
+            <input type="number" title="Catapulta" id="catapulta" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-mortero" title="Mortero"></div>
+            <input type="number" title="Mortero" id="mortero" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-medico" title="Médico"></div>
+            <input type="number" title="Médico" id="medico" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-cocinero" title="Cocinero"></div>
+            <input type="number" title="Cocinero" id="cocinero" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-espartano" title="Espartano"></div>
+            <input type="number" title="Espartano" id="espartano" min="0" oninput="calculo()">
+          </div>
+        </div>
+      </div>
+      <div id="tabla2" class="tabla">
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-espolon" title="Barco-espolón"></div>
+            <input type="number" title="Barco-espolón" id="espolon" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-ballesta" title="Barco-ballesta"></div>
+            <input type="number" title="Barco-ballesta" id="ballesta" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-lanzallamas" title="Barco-lanza llamas"></div>
+            <input type="number" title="Barco-lanza llamas" id="lanzallamas" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-barcoCatapulta" title="Barco-catapulta"></div>
+            <input type="number" title="Barco-catapulta" id="barco_catapulta" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-barcoMortero" title="Barco-mortero"></div>
+            <input type="number" title="Barco-mortero" id="barco_mortero" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-vapor" title="Barco espolón de vapor"></div>
+            <input type="number" title="Barco espolón de vapor" id="vapor" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-lanzamisiles" title="Barco lanzamisiles"></div>
+            <input type="number" title="Barco lanzamisiles" id="lanzamisiles" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-submarino" title="Submarino"></div>
+            <input type="number" title="Submarino" id="submarino" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-palas" title="Lancha de palas"></div>
+            <input type="number" title="Lancha de palas" id="palas" min="0" oninput="calculo()">
+          </div>
+        </div>
+        <div class="columna">
+          <div class="input-containers">
+            <div class="img-before-portaglobos" title="Portaglobos"></div>
+            <input type="number" title="Portaglobos" id="portaglobos" min="0" oninput="calculo()">
+          </div>
+          <div class="input-containers">
+            <div class="img-before-mantenimiento" title="Barco de Mantenimiento"></div>
+            <input type="number" title="Barco de Mantenimiento" id="barco_mantenimiento" min="0" oninput="calculo()">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Resultados</h4>
+    <div class="contenedor-chachi2">
+      <table class="tabla-resultados">
+        <tr>
+          <th colspan="2">Terrestres</th>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_madera"></td>
+          <td class="derecha"><img src="img/iconos/madera.png" title="Madera"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_vino"></td>
+          <td class="derecha"><img src="img/iconos/vino.png" title="Vino"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_cristal"></td>
+          <td class="derecha"><img src="img/iconos/cristal.png" title="Cristal"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_azufre"></td>
+          <td class="derecha"><img src="img/iconos/azufre.png" title="Azufre"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_ciudadanos"></td>
+          <td class="derecha"><img src="img/iconos/ciudadano.png" title="Ciudadanos"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_manutencion"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención por hora"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_manutencion_dia"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención diaria"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_manutencion_semanal"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención semanal"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_generales"></td>
+          <td class="derecha"><img src="img/iconos/generales.png" title="Generales"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_peso"></td>
+          <td class="derecha"><img src="img/iconos/peso.png" title="Peso"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_mercantes"></td>
+          <td class="derecha"><img src="img/iconos/mercantes.png" title="Mercantes"></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="center"><button onclick="borrarInputs('tabla1')">Borrar Terrestres</button></td>
+        </tr>
+      </table>
+      <table class="tabla-resultados">
+        <tr>
+          <th colspan="2">Navales</th>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_madera"></td>
+          <td class="derecha"><img src="img/iconos/madera.png" title="Madera"></td>
+        </tr>
+        <tr>
+          <td class="derecha">-</td>
+          <td class="derecha"><img src="img/iconos/vino.png"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_cristal"></td>
+          <td class="derecha"><img src="img/iconos/cristal.png" title="Cristal"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_azufre"></td>
+          <td class="derecha"><img src="img/iconos/azufre.png" title="Azufre"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_ciudadanos"></td>
+          <td class="derecha"><img src="img/iconos/ciudadano.png" title="Ciudadanos"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_manutencion"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención por hora"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_manutencion_dia"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención diaria"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_manutencion_semanal"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención semanal"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="total_naval_generales"></td>
+          <td class="derecha"><img src="img/iconos/generales.png" title="Generales"></td>
+        </tr>
+        <tr>
+          <td class="derecha">-</td>
+          <td class="derecha"><img src="img/iconos/peso.png"></td>
+        </tr>
+        <tr>
+          <td class="derecha">-</td>
+          <td class="derecha"><img src="img/iconos/mercantes.png"></td>
+        </tr>
+        <tr>
+        <tr>
+          <td colspan="2" class="center"><button onclick="borrarInputs('tabla2')">Borrar Navales</button></td>
+        </tr>
+      </table>
+      <table class="tabla-resultados">
+        <tr>
+          <th>Totales</th>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_madera"></td>
+          <td class="derecha"><img src="img/iconos/madera.png" title="Madera"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_vino"></td>
+          <td class="derecha"><img src="img/iconos/vino.png" title="Vino"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_cristal"></td>
+          <td class="derecha"><img src="img/iconos/cristal.png" title="Cristal"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_azufre"></td>
+          <td class="derecha"><img src="img/iconos/azufre.png" title="Azufre"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_ciudadanos"></td>
+          <td class="derecha"><img src="img/iconos/ciudadano.png" title="Ciudadanos"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_manutencion"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención por hora"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_manutencion_dia"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención diaria"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_manutencion_semanal"></td>
+          <td class="derecha"><img src="img/iconos/oro.png" title="Manutención semanal"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_generales"></td>
+          <td class="derecha"><img src="img/iconos/generales.png" title="Generales"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_peso"></td>
+          <td class="derecha"><img src="img/iconos/peso.png" title="Peso"></td>
+        </tr>
+        <tr>
+          <td class="derecha" id="resultadoGeneral_mercantes"></td>
+          <td class="derecha"><img src="img/iconos/mercantes.png" title="Mercantes"></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="center"><button onclick="borrarDatos()">Borrar Todo</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="contenedor-resultados-adicionales">
+      <p class="centrado"><span id="salida-pro-madera">(ingrese datos de su producción)</span><span id="mdias"></span id="msema"><span></span></p>
+      <p class="centrado"><span id="salida-pro-vino"></span></p>
+      <p class="centrado"><span id="salida-pro-azufre"></span></p>
+      <p class="centrado"><span id="salida-pro-cristal"></span></p>
+      <p class="centrado"><span id="salida-pro-ciudadanos"></span></p>
+      <p class="centrado"><span id="salida-cantidad-oro"></span><span id="salida-cantidad-oro-diaria"></span><span id="salida-cantidad-oro-semanal"></span></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>by Astralis</p>
+    <p><a class="link" href="https://primospython.com/ika-dif.html">Calculadora Ika-DIF</a></p>
+    <p><a class="link" href="https://primospython.com/calculadora-pi.html">Calculadora Ika-PI</a></p>
+  </footer>
+
+<script>
+  function seleccionarInput(inputId) {
+    document.getElementById(inputId).focus();
+  }
+
+  function borrarDatos() {
+    location.reload();
+  }
+
+  function borrarInputs(tablaId) {
+    var tabla = document.getElementById(tablaId);
+    var inputs = tabla.getElementsByTagName('input');
+
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].value = "";
+    }
+    calculo()
+  }
+
+  // Lista de Unidades Terrestres
+
+  var unidades = {
+    hondero: {
+      costo: {
+        ciudadano: 1,
+        madera: 20,
+        vino: 0,
+        cristal: 0,
+        azufre: 0
+      },
+      generales: 0.4,
+      manutencion: 2,
+      peso: 3
+    },
+    arquero: {
+      costo: {
+        ciudadano: 1,
+        madera: 30,
+        vino: 0,
+        cristal: 0,
+        azufre: 25
+      },
+      generales: 1,
+      manutencion: 4,
+      peso: 5
+    },
+    fusilero: {
+      costo: {
+        ciudadano: 1,
+        madera: 50,
+        vino: 0,
+        cristal: 0,
+        azufre: 150
+      },
+      generales: 4,
+      manutencion: 3,
+      peso: 5
+    },
+    lancero: {
+      costo: {
+        ciudadano: 1,
+        madera: 30,
+        vino: 0,
+        cristal: 0,
+        azufre: 0
+      },
+      generales: 0.6,
+      manutencion: 1,
+      peso: 3
+    },
+    espadachin: {
+      costo: {
+        ciudadano: 1,
+        madera: 30,
+        vino: 0,
+        cristal: 0,
+        azufre: 30
+      },
+      generales: 1.2,
+      manutencion: 4,
+      peso: 3
+    },
+    hoplita: {
+      costo: {
+        ciudadano: 1,
+        madera: 40,
+        vino: 0,
+        cristal: 0,
+        azufre: 30
+      },
+      generales: 1.4,
+      manutencion: 3,
+      peso: 5
+    },
+    gigante: {
+      costo: {
+        ciudadano: 2,
+        madera: 130,
+        vino: 0,
+        cristal: 0,
+        azufre: 180
+      },
+      generales: 6.2,
+      manutencion: 12,
+      peso: 15
+    },
+    girocoptero: {
+      costo: {
+        ciudadano: 3,
+        madera: 25,
+        vino: 0,
+        cristal: 0,
+        azufre: 100
+      },
+      generales: 2.6,
+      manutencion: 15,
+      peso: 15
+    },
+    globo: {
+      costo: {
+        ciudadano: 5,
+        madera: 40,
+        vino: 0,
+        cristal: 0,
+        azufre: 250
+      },
+      generales: 5.8,
+      manutencion: 45,
+      peso: 30
+    },
+    ariete: {
+      costo: {
+        ciudadano: 5,
+        madera: 220,
+        vino: 0,
+        cristal: 0,
+        azufre: 0
+      },
+      generales: 4.4,
+      manutencion: 15,
+      peso: 30
+    },
+    catapulta: {
+      costo: {
+        ciudadano: 5,
+        madera: 260,
+        vino: 0,
+        cristal: 0,
+        azufre: 300
+      },
+      generales: 11.2,
+      manutencion: 25,
+      peso: 30
+    },
+    mortero: {
+      costo: {
+        ciudadano: 5,
+        madera: 300,
+        vino: 0,
+        cristal: 0,
+        azufre: 1250
+      },
+      generales: 31,
+      manutencion: 30,
+      peso: 30
+    },
+    medico: {
+      costo: {
+        ciudadano: 1,
+        madera: 50,
+        vino: 0,
+        cristal: 450,
+        azufre: 0
+      },
+      generales: 10,
+      manutencion: 20,
+      peso: 10
+    },
+    cocinero: {
+      costo: {
+        ciudadano: 1,
+        madera: 50,
+        vino: 150,
+        cristal: 0,
+        azufre: 0
+      },
+      generales: 4,
+      manutencion: 10,
+      peso: 20
+    },
+    espartano: {
+      costo: {
+        ciudadano: 1,
+        madera: 40,
+        vino: 0,
+        cristal: 0,
+        azufre: 40
+      },
+      generales: 1.6,
+      manutencion: 0,
+      peso: 5
+    }
+  };
+
+  // Lista de Unidades Navales
+
+  var navales = {
+    espolon: {
+      costo: {
+        ciudadano: 3,
+        madera: 250,
+        cristal: 0,
+        azufre: 0
+      },
+      generales: 5,
+      manutencion: 15
+    },
+    ballesta: {
+      costo: {
+        ciudadano: 6,
+        madera: 180,
+        cristal: 0,
+        azufre: 160
+      },
+      generales: 6.8,
+      manutencion: 20
+    },
+    lanzallamas: {
+      costo: {
+        ciudadano: 4,
+        madera: 80,
+        cristal: 0,
+        azufre: 230
+      },
+      generales: 6.2,
+      manutencion: 25
+    },
+    barcoCatapulta: {
+      costo: {
+        ciudadano: 5,
+        madera: 180,
+        cristal: 0,
+        azufre: 140
+      },
+      generales: 6.4,
+      manutencion: 35
+    },
+    barcoMortero: {
+      costo: {
+        ciudadano: 5,
+        madera: 220,
+        cristal: 0,
+        azufre: 900
+      },
+      generales: 22.4,
+      manutencion: 50
+    },
+    vapor: {
+      costo: {
+        ciudadano: 2,
+        madera: 400,
+        cristal: 0,
+        azufre: 800
+      },
+      generales: 24,
+      manutencion: 45
+    },
+    lanzamisiles: {
+      costo: {
+        ciudadano: 2,
+        madera: 200,
+        cristal: 0,
+        azufre: 1200
+      },
+      generales: 28,
+      manutencion: 55
+    },
+    submarino: {
+      costo: {
+        ciudadano: 3,
+        madera: 160,
+        cristal: 750,
+        azufre: 100
+      },
+      generales: 22.2,
+      manutencion: 50
+    },
+    palas: {
+      costo: {
+        ciudadano: 1,
+        madera: 40,
+        cristal: 0,
+        azufre: 280
+      },
+      generales: 6.6,
+      manutencion: 5
+    },
+    portaglobos: {
+      costo: {
+        ciudadano: 8,
+        madera: 700,
+        cristal: 0,
+        azufre: 700
+      },
+      generales: 28,
+      manutencion: 100
+    },
+    barcoMantenimiento: {
+      costo: {
+        ciudadano: 7,
+        madera: 300,
+        cristal: 250,
+        azufre: 250
+      },
+      generales: 15,
+      manutencion: 100
+    }
+  };
+
+  // Función que se ejecuta cada vez que hay un cambio de valor en la página
+
+  function calculo() {
+
+    // VARIABLES
+
+    // Variables para los totales de unidades terrestres
+    var totalMadera = 0;
+    var totalVino = 0;
+    var totalCristal = 0;
+    var totalAzufre = 0;
+    var totalCiudadanos = 0;
+    var totalGenerales = 0;
+    var totalManutencion = 0;
+    var totalManutencionDia = 0;
+    var totalManutencionSemanal = 0;
+    var totalPeso = 0;
+    var totalMercantes = 0;
+    // Variables para los totales de unidades navales
+    var total_navalMadera = 0;
+    var total_navalCristal = 0;
+    var total_navalAzufre = 0;
+    var total_navalCiudadanos = 0;
+    var total_navalGenerales = 0;
+    var total_navalManutencion = 0;
+    var total_navalManutencionDia = 0;
+    var total_navalManutencionSemanal = 0;
+    // Variables para las unidades terrestres introducidas por el usuario en la tabla
+    var honderoInput = parseInt(document.getElementById("hondero").value) || 0;
+    var arqueroInput = parseInt(document.getElementById("arquero").value) || 0;
+    var fusileroInput = parseInt(document.getElementById("fusilero").value) || 0;
+    var lanceroInput = parseInt(document.getElementById("lancero").value) || 0;
+    var espadachinInput = parseInt(document.getElementById("espadachin").value) || 0;
+    var hoplitaInput = parseInt(document.getElementById("hoplita").value) || 0;
+    var giganteInput = parseInt(document.getElementById("gigante").value) || 0;
+    var girocopteroInput = parseInt(document.getElementById("girocoptero").value) || 0;
+    var globoInput = parseInt(document.getElementById("globo").value) || 0;
+    var arieteInput = parseInt(document.getElementById("ariete").value) || 0;
+    var catapultaInput = parseInt(document.getElementById("catapulta").value) || 0;
+    var morteroInput = parseInt(document.getElementById("mortero").value) || 0;
+    var medicoInput = parseInt(document.getElementById("medico").value) || 0;
+    var cocineroInput = parseInt(document.getElementById("cocinero").value) || 0;
+    var espartanoInput = parseInt(document.getElementById("espartano").value) || 0;
+    // Variables para las unidades navales introducidas por el usuario en la tabla
+    var espolonInput = parseInt(document.getElementById("espolon").value) || 0;
+    var ballestaInput = parseInt(document.getElementById("ballesta").value) || 0;
+    var lanzallamasInput = parseInt(document.getElementById("lanzallamas").value) || 0;
+    var barcoCatapultaInput = parseInt(document.getElementById("barco_catapulta").value) || 0;
+    var barcoMorteroInput = parseInt(document.getElementById("barco_mortero").value) || 0;
+    var vaporInput = parseInt(document.getElementById("vapor").value) || 0;
+    var lanzamisilesInput = parseInt(document.getElementById("lanzamisiles").value) || 0;
+    var submarinoInput = parseInt(document.getElementById("submarino").value) || 0;
+    var palasInput = parseInt(document.getElementById("palas").value) || 0;
+    var portaglobosInput = parseInt(document.getElementById("portaglobos").value) || 0;
+    var barcoMantenimientoInput = parseInt(document.getElementById("barco_mantenimiento").value) || 0;
+    
+    // CALCULOS
+
+    // Calculo total unidades terrestres
+    // Calculo para el total de madera de las unidades terrestres
+    totalMadera =
+    (honderoInput * unidades.hondero.costo.madera) +
+    (arqueroInput * unidades.arquero.costo.madera) +
+    (fusileroInput * unidades.fusilero.costo.madera) +
+    (lanceroInput * unidades.lancero.costo.madera) +
+    (espadachinInput * unidades.espadachin.costo.madera) +
+    (hoplitaInput * unidades.hoplita.costo.madera) +
+    (giganteInput * unidades.gigante.costo.madera) +
+    (girocopteroInput * unidades.girocoptero.costo.madera) +
+    (globoInput * unidades.globo.costo.madera) +
+    (arieteInput * unidades.ariete.costo.madera) +
+    (catapultaInput * unidades.catapulta.costo.madera) +
+    (morteroInput * unidades.mortero.costo.madera) +
+    (medicoInput * unidades.medico.costo.madera) +
+    (cocineroInput * unidades.cocinero.costo.madera) +
+    (espartanoInput * unidades.espartano.costo.madera);
+    // Calculo para el total de vino de las unidades terrestres
+    totalVino =
+    (honderoInput * unidades.hondero.costo.vino) +
+    (arqueroInput * unidades.arquero.costo.vino) +
+    (fusileroInput * unidades.fusilero.costo.vino) +
+    (lanceroInput * unidades.lancero.costo.vino) +
+    (espadachinInput * unidades.espadachin.costo.vino) +
+    (hoplitaInput * unidades.hoplita.costo.vino) +
+    (giganteInput * unidades.gigante.costo.vino) +
+    (girocopteroInput * unidades.girocoptero.costo.vino) +
+    (globoInput * unidades.globo.costo.vino) +
+    (arieteInput * unidades.ariete.costo.vino) +
+    (catapultaInput * unidades.catapulta.costo.vino) +
+    (morteroInput * unidades.mortero.costo.vino) +
+    (medicoInput * unidades.medico.costo.vino) +
+    (cocineroInput * unidades.cocinero.costo.vino) +
+    (espartanoInput * unidades.espartano.costo.vino);
+    // Calculo para el total de cristal de las unidades terrestres
+    totalCristal =
+    (honderoInput * unidades.hondero.costo.cristal) +
+    (arqueroInput * unidades.arquero.costo.cristal) +
+    (fusileroInput * unidades.fusilero.costo.cristal) +
+    (lanceroInput * unidades.lancero.costo.cristal) +
+    (espadachinInput * unidades.espadachin.costo.cristal) +
+    (hoplitaInput * unidades.hoplita.costo.cristal) +
+    (giganteInput * unidades.gigante.costo.cristal) +
+    (girocopteroInput * unidades.girocoptero.costo.cristal) +
+    (globoInput * unidades.globo.costo.cristal) +
+    (arieteInput * unidades.ariete.costo.cristal) +
+    (catapultaInput * unidades.catapulta.costo.cristal) +
+    (morteroInput * unidades.mortero.costo.cristal) +
+    (medicoInput * unidades.medico.costo.cristal) +
+    (cocineroInput * unidades.cocinero.costo.cristal) +
+    (espartanoInput * unidades.espartano.costo.cristal);
+    // Calculo para el total de azufre de las unidades terrestres
+    totalAzufre =
+    (honderoInput * unidades.hondero.costo.azufre) +
+    (arqueroInput * unidades.arquero.costo.azufre) +
+    (fusileroInput * unidades.fusilero.costo.azufre) +
+    (lanceroInput * unidades.lancero.costo.azufre) +
+    (espadachinInput * unidades.espadachin.costo.azufre) +
+    (hoplitaInput * unidades.hoplita.costo.azufre) +
+    (giganteInput * unidades.gigante.costo.azufre) +
+    (girocopteroInput * unidades.girocoptero.costo.azufre) +
+    (globoInput * unidades.globo.costo.azufre) +
+    (arieteInput * unidades.ariete.costo.azufre) +
+    (catapultaInput * unidades.catapulta.costo.azufre) +
+    (morteroInput * unidades.mortero.costo.azufre) +
+    (medicoInput * unidades.medico.costo.azufre) +
+    (cocineroInput * unidades.cocinero.costo.azufre) +
+    (espartanoInput * unidades.espartano.costo.azufre);
+    // Calculo para el total de ciudadanos de las unidades terrestres
+    totalCiudadanos =
+    (honderoInput * unidades.hondero.costo.ciudadano) +
+    (arqueroInput * unidades.arquero.costo.ciudadano) +
+    (fusileroInput * unidades.fusilero.costo.ciudadano) +
+    (lanceroInput * unidades.lancero.costo.ciudadano) +
+    (espadachinInput * unidades.espadachin.costo.ciudadano) +
+    (hoplitaInput * unidades.hoplita.costo.ciudadano) +
+    (giganteInput * unidades.gigante.costo.ciudadano) +
+    (girocopteroInput * unidades.girocoptero.costo.ciudadano) +
+    (globoInput * unidades.globo.costo.ciudadano) +
+    (arieteInput * unidades.ariete.costo.ciudadano) +
+    (catapultaInput * unidades.catapulta.costo.ciudadano) +
+    (morteroInput * unidades.mortero.costo.ciudadano) +
+    (medicoInput * unidades.medico.costo.ciudadano) +
+    (cocineroInput * unidades.cocinero.costo.ciudadano) +
+    (espartanoInput * unidades.espartano.costo.ciudadano);
+    // Calculo para el total de generales de las unidades terrestres
+    totalGenerales =
+    (honderoInput * unidades.hondero.generales) +
+    (arqueroInput * unidades.arquero.generales) +
+    (fusileroInput * unidades.fusilero.generales) +
+    (lanceroInput * unidades.lancero.generales) +
+    (espadachinInput * unidades.espadachin.generales) +
+    (hoplitaInput * unidades.hoplita.generales) +
+    (giganteInput * unidades.gigante.generales) +
+    (girocopteroInput * unidades.girocoptero.generales) +
+    (globoInput * unidades.globo.generales) +
+    (arieteInput * unidades.ariete.generales) +
+    (catapultaInput * unidades.catapulta.generales) +
+    (morteroInput * unidades.mortero.generales) +
+    (medicoInput * unidades.medico.generales) +
+    (cocineroInput * unidades.cocinero.generales) +
+    (espartanoInput * unidades.espartano.generales);
+    // Calculo para el total de manutencion de las unidades terrestres
+    totalManutencion =
+    (honderoInput * unidades.hondero.manutencion) +
+    (arqueroInput * unidades.arquero.manutencion) +
+    (fusileroInput * unidades.fusilero.manutencion) +
+    (lanceroInput * unidades.lancero.manutencion) +
+    (espadachinInput * unidades.espadachin.manutencion) +
+    (hoplitaInput * unidades.hoplita.manutencion) +
+    (giganteInput * unidades.gigante.manutencion) +
+    (girocopteroInput * unidades.girocoptero.manutencion) +
+    (globoInput * unidades.globo.manutencion) +
+    (arieteInput * unidades.ariete.manutencion) +
+    (catapultaInput * unidades.catapulta.manutencion) +
+    (morteroInput * unidades.mortero.manutencion) +
+    (medicoInput * unidades.medico.manutencion) +
+    (cocineroInput * unidades.cocinero.manutencion) +
+    (espartanoInput * unidades.espartano.manutencion);
+    // Calculo para el total del peso de las unidades terrestres
+    totalPeso =
+    (honderoInput * unidades.hondero.peso) +
+    (arqueroInput * unidades.arquero.peso) +
+    (fusileroInput * unidades.fusilero.peso) +
+    (lanceroInput * unidades.lancero.peso) +
+    (espadachinInput * unidades.espadachin.peso) +
+    (hoplitaInput * unidades.hoplita.peso) +
+    (giganteInput * unidades.gigante.peso) +
+    (girocopteroInput * unidades.girocoptero.peso) +
+    (globoInput * unidades.globo.peso) +
+    (arieteInput * unidades.ariete.peso) +
+    (catapultaInput * unidades.catapulta.peso) +
+    (morteroInput * unidades.mortero.peso) +
+    (medicoInput * unidades.medico.peso) +
+    (cocineroInput * unidades.cocinero.peso) +
+    (espartanoInput * unidades.espartano.peso);
+
+    // Calculo total unidades navales
+    // Calculo para el total de madera de las unidades navales
+    total_navalMadera =
+    (espolonInput * navales.espolon.costo.madera) +
+    (ballestaInput * navales.ballesta.costo.madera) +
+    (lanzallamasInput * navales.lanzallamas.costo.madera) +
+    (barcoCatapultaInput * navales.barcoCatapulta.costo.madera) +
+    (barcoMorteroInput * navales.barcoMortero.costo.madera) +
+    (vaporInput * navales.vapor.costo.madera) +
+    (lanzamisilesInput * navales.lanzamisiles.costo.madera) +
+    (submarinoInput * navales.submarino.costo.madera) +
+    (palasInput * navales.palas.costo.madera) +
+    (portaglobosInput * navales.portaglobos.costo.madera) +
+    (barcoMantenimientoInput * navales.barcoMantenimiento.costo.madera);
+    // Calculo para el total de cristal de las unidades navales
+    total_navalCristal =
+    (espolonInput * navales.espolon.costo.cristal) +
+    (ballestaInput * navales.ballesta.costo.cristal) +
+    (lanzallamasInput * navales.lanzallamas.costo.cristal) +
+    (barcoCatapultaInput * navales.barcoCatapulta.costo.cristal) +
+    (barcoMorteroInput * navales.barcoMortero.costo.cristal) +
+    (vaporInput * navales.vapor.costo.cristal) +
+    (lanzamisilesInput * navales.lanzamisiles.costo.cristal) +
+    (submarinoInput * navales.submarino.costo.cristal) +
+    (palasInput * navales.palas.costo.cristal) +
+    (portaglobosInput * navales.portaglobos.costo.cristal) +
+    (barcoMantenimientoInput * navales.barcoMantenimiento.costo.cristal);
+    // Calculo para el total de azufre de las unidades navales
+    total_navalAzufre =
+    (espolonInput * navales.espolon.costo.azufre) +
+    (ballestaInput * navales.ballesta.costo.azufre) +
+    (lanzallamasInput * navales.lanzallamas.costo.azufre) +
+    (barcoCatapultaInput * navales.barcoCatapulta.costo.azufre) +
+    (barcoMorteroInput * navales.barcoMortero.costo.azufre) +
+    (vaporInput * navales.vapor.costo.azufre) +
+    (lanzamisilesInput * navales.lanzamisiles.costo.azufre) +
+    (submarinoInput * navales.submarino.costo.azufre) +
+    (palasInput * navales.palas.costo.azufre) +
+    (portaglobosInput * navales.portaglobos.costo.azufre) +
+    (barcoMantenimientoInput * navales.barcoMantenimiento.costo.azufre);
+    // Calculo para el total de ciudadanos de las unidades navales
+    total_navalCiudadanos =
+    (espolonInput * navales.espolon.costo.ciudadano) +
+    (ballestaInput * navales.ballesta.costo.ciudadano) +
+    (lanzallamasInput * navales.lanzallamas.costo.ciudadano) +
+    (barcoCatapultaInput * navales.barcoCatapulta.costo.ciudadano) +
+    (barcoMorteroInput * navales.barcoMortero.costo.ciudadano) +
+    (vaporInput * navales.vapor.costo.ciudadano) +
+    (lanzamisilesInput * navales.lanzamisiles.costo.ciudadano) +
+    (submarinoInput * navales.submarino.costo.ciudadano) +
+    (palasInput * navales.palas.costo.ciudadano) +
+    (portaglobosInput * navales.portaglobos.costo.ciudadano) +
+    (barcoMantenimientoInput * navales.barcoMantenimiento.costo.ciudadano);
+    // Calculo para el total de generales de las unidades navales
+    total_navalGenerales =
+    (espolonInput * navales.espolon.generales) +
+    (ballestaInput * navales.ballesta.generales) +
+    (lanzallamasInput * navales.lanzallamas.generales) +
+    (barcoCatapultaInput * navales.barcoCatapulta.generales) +
+    (barcoMorteroInput * navales.barcoMortero.generales) +
+    (vaporInput * navales.vapor.generales) +
+    (lanzamisilesInput * navales.lanzamisiles.generales) +
+    (submarinoInput * navales.submarino.generales) +
+    (palasInput * navales.palas.generales) +
+    (portaglobosInput * navales.portaglobos.generales) +
+    (barcoMantenimientoInput * navales.barcoMantenimiento.generales);
+    // Calculo para el total de manutencion de las unidades navales
+    total_navalManutencion =
+    (espolonInput * navales.espolon.manutencion) +
+    (ballestaInput * navales.ballesta.manutencion) +
+    (lanzallamasInput * navales.lanzallamas.manutencion) +
+    (barcoCatapultaInput * navales.barcoCatapulta.manutencion) +
+    (barcoMorteroInput * navales.barcoMortero.manutencion) +
+    (vaporInput * navales.vapor.manutencion) +
+    (lanzamisilesInput * navales.lanzamisiles.manutencion) +
+    (submarinoInput * navales.submarino.manutencion) +
+    (palasInput * navales.palas.manutencion) +
+    (portaglobosInput * navales.portaglobos.manutencion) +
+    (barcoMantenimientoInput * navales.barcoMantenimiento.manutencion);
+
+    // Calculo para el total de mercantes segun el peso de las unidades terrestres
+    totalMercantes = Math.ceil(totalPeso / 500);
+    
+
+    // Calculo para la manutencion diaria y semanal de las unidades terrestres y navales
+    totalManutencionDia = totalManutencion * 24;  //Terrestre
+    total_navalManutencionDia = total_navalManutencion * 24;  //Naval
+    totalManutencionSemanal = totalManutencionDia * 7;  //Terrestre
+    total_navalManutencionSemanal = total_navalManutencionDia * 7;  //Naval
+
+    // Calculos para el descuento mediante porcentajes
+    // Variable de descuento para unidades terrestres
+    var descuentoPorcentaje = 0;
+    //Si el valor en futuroT(input) es mayor que 0
+    if (document.getElementById("futuroT").value > 0) {
+      document.getElementById("cartografia").checked = true;//Seleccionas este checkbox
+      document.getElementById("codigoDeHonor").checked = true;//Seleccionas este checkbox
+      document.getElementById("logistica").checked = true;//Seleccionas este checkbox
+      descuentoPorcentaje = 14;//Aplicas 14 a descuento
+      var valorFuturoT = parseInt(document.getElementById("futuroT").value) || 0;//Pasas el valor introducido por el usuario a una variable
+      valorFuturoT *= 2;//Utilizas la variable para poder multiplicar el valor por 2
+      descuentoPorcentaje += valorFuturoT;//Vuelves a utilizar la variable para asignar el porcentaje de descuento del fututo al descuento terrestre
+    } else if (document.getElementById("logistica").checked) {// Si no, si logistica esta checked
+      document.getElementById("cartografia").checked = true;//Seleccionas este checkbox
+      document.getElementById("codigoDeHonor").checked = true;//Seleccionas este checkbox
+      descuentoPorcentaje = 14;//Aplicas 14 a descuento
+    } else if (document.getElementById("codigoDeHonor").checked) {// Si no, si códigodehonor esta checked
+      document.getElementById("cartografia").checked = true;//Seleccionas este checkbox
+      descuentoPorcentaje = 6;//Aplicas 6 a descuento
+    } else if (document.getElementById("cartografia").checked) {// Si no, si cartografia esta checked
+      descuentoPorcentaje = 2;//Solo aplicas 2 a descuento
+    }
+    //Comprueba si el checkbox de discatura esta activo
+    if (document.getElementById("dictadura").checked) {
+      //document.getElementById("oligarquia").checked = false;//Desactiva Oligarquia
+      descuentoPorcentaje += 2;//Aplica porcentaje a terrestres
+      descuento_navalPorcentaje += 2;//Aplica porcentaje a navales
+    }
+
+    
+    var descuentoTotal = totalManutencion * (descuentoPorcentaje / 100);
+
+    totalManutencion = totalManutencion - descuentoTotal;
+    totalManutencionDia = totalManutencion * 24;
+    totalManutencionSemanal = totalManutencionDia * 7;
+
+    var cartografiaCheckbox = document.getElementById("cartografia");
+    var codigoDeHonorCheckbox = document.getElementById("codigoDeHonor");
+    var logisticaCheckbox = document.getElementById("logistica");
+
+    codigoDeHonorCheckbox.addEventListener("change", function() {
+      if (codigoDeHonorCheckbox.checked) {
+        cartografiaCheckbox.checked = true
+        cartografiaCheckbox.disabled = true
+      } else {
+        cartografiaCheckbox.disabled = false
+        cartografiaCheckbox.checked = true
+      }
+    });
+
+    logisticaCheckbox.addEventListener("change", function() {
+      if (logisticaCheckbox.checked) {
+        cartografiaCheckbox.checked = true
+        cartografiaCheckbox.disabled = true
+        codigoDeHonor.checked = true
+        codigoDeHonor.disabled = true
+      } else {
+        cartografiaCheckbox.checked = true
+        cartografiaCheckbox.disabled = true
+        codigoDeHonor.checked = true
+        codigoDeHonor.disabled = false
+      }
+    });
+    
+    var descuento_navalPorcentaje = 0;
+
+    if (document.getElementById("futuroN").value > 0) {
+      document.getElementById("cartas_de_navegacion").checked = true;
+      document.getElementById("mantenimiento_de_barcos").checked = true;
+      document.getElementById("brea").checked = true;
+      descuento_navalPorcentaje = 14;
+      var valorFuturoN = parseInt(document.getElementById("futuroN").value) || 0;
+      valorFuturoN *= 2;
+      descuento_navalPorcentaje += valorFuturoN;
+    } else if (document.getElementById("cartas_de_navegacion").checked) {
+      document.getElementById("mantenimiento_de_barcos").checked = true;
+      document.getElementById("brea").checked = true;
+      descuento_navalPorcentaje = 14;
+    } else if (document.getElementById("brea").checked) {
+      document.getElementById("mantenimiento_de_barcos").checked = true;
+      descuento_navalPorcentaje = 6;
+    } else if (document.getElementById("mantenimiento_de_barcos").checked) {
+      descuento_navalPorcentaje = 2;
+    }
+
+    if (document.getElementById("oligarquia").checked) {
+      //document.getElementById("dictadura").checked = false;
+      descuento_navalPorcentaje += 2;
+    }
+    if (document.getElementById("dictadura").checked) {
+      //document.getElementById("oligarquia").checked = false;
+      descuento_navalPorcentaje += 2;
+    }
+
+
+    var descuento_navalTotal = total_navalManutencion * (descuento_navalPorcentaje / 100);
+
+    total_navalManutencion = total_navalManutencion - descuento_navalTotal;
+    total_navalManutencionDia = total_navalManutencion * 24;
+    total_navalManutencionSemanal = total_navalManutencionDia * 7;
+
+    var mantenimientoBarcosCheckbox = document.getElementById("mantenimiento_de_barcos");
+    var breaCheckbox = document.getElementById("brea");
+    var cartasNavegacionCheckbox = document.getElementById("cartas_de_navegacion");
+
+    breaCheckbox.addEventListener("change", function() {
+      if (breaCheckbox.checked) {
+        mantenimientoBarcosCheckbox.checked = true
+        mantenimientoBarcosCheckbox.disabled = true
+      } else {
+        mantenimientoBarcosCheckbox.disabled = false
+        mantenimientoBarcosCheckbox.checked = true
+      }
+    });
+
+    cartasNavegacionCheckbox.addEventListener("change", function() {
+      if (cartasNavegacionCheckbox.checked) {
+        mantenimientoBarcosCheckbox.checked = true
+        mantenimientoBarcosCheckbox.disabled = true
+        breaCheckbox.checked = true
+        breaCheckbox.disabled = true
+      } else {
+        mantenimientoBarcosCheckbox.checked = true
+        mantenimientoBarcosCheckbox.disabled = true
+        breaCheckbox.checked = true
+        breaCheckbox.disabled = false
+      }
+    });
+       
+    const checkboxes = document.querySelectorAll('input[name="gobierno"]');
+  
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('change', () => {
+        checkboxes.forEach((otherCheckbox) => {
+          if (otherCheckbox !== checkbox) {
+            otherCheckbox.checked = false;
+          }
+        });
+      });
+    });
+
+    /************************************************************************************/
+    /************************************************************************************/
+
+    var carpinteria = parseInt(document.getElementById("carpinteria").value) || 0;
+    var vinyedo = parseInt(document.getElementById("vinyedo").value) || 0;
+    var optico = parseInt(document.getElementById("optico").value) || 0;
+    var area = parseInt(document.getElementById("area").value) || 0;
+
+    var reduccionM = carpinteria
+    var reduccionMadera = totalMadera * (reduccionM / 100);
+    var reduccionMaderaNaval = total_navalMadera * (reduccionM / 100);
+    var maderaFinal = totalMadera - reduccionMadera;
+    var maderaFinalNaval = total_navalMadera - reduccionMaderaNaval;
+    totalMadera = maderaFinal;
+    total_navalMadera = maderaFinalNaval;
+
+    var reduccionv = vinyedo
+    var reduccionVino = totalVino * (reduccionv / 100);
+    var vinoFinal = totalVino - reduccionVino;
+    totalVino = vinoFinal;
+        
+    var reduccionc = optico
+    var reduccionCristal = totalCristal * (reduccionc / 100);
+    var reduccionCristalNaval = total_navalCristal * (reduccionc / 100);
+    var cristalFinal = totalCristal - reduccionCristal;
+    var cristalFinalNaval = total_navalCristal - reduccionCristalNaval;
+    totalCristal = cristalFinal;
+    total_navalCristal = cristalFinalNaval;
+      
+    var reducciona = area
+    var reduccionAzufre = totalAzufre * (reducciona / 100);
+    var reduccionAzufreNaval = total_navalAzufre * (reducciona / 100);
+    var azufreFinal = totalAzufre - reduccionAzufre;
+    var azufreFinalNaval = total_navalAzufre - reduccionAzufreNaval;
+    totalAzufre = azufreFinal;
+    total_navalAzufre = azufreFinalNaval;
+       
+    /************************************************************************************/
+    /************************************************************************************/
+    var proCiudadanos = parseInt(document.getElementById("pro-ciudadanos").value) || 0;
+    var ciudadanosNecesarios = proCiudadanos - (totalCiudadanos + total_navalCiudadanos);
+    if (ciudadanosNecesarios > 0) {
+      document.getElementById("salida-pro-ciudadanos").textContent = "Te sobran " + Math.round(ciudadanosNecesarios).toLocaleString() + " ciudadanos!";
+    } else {
+      document.getElementById("salida-pro-ciudadanos").textContent = "Te faltan " + Math.abs(Math.round(ciudadanosNecesarios)).toLocaleString() + " ciudadanos!";
+    }
+    
+
+    var cantidadOro = parseInt(document.getElementById("cantidad-oro").value) || 0;
+    var manutencionHorasPosible =  Math.round(cantidadOro / (totalManutencion + total_navalManutencion));
+    if (cantidadOro < manutencionHorasPosible || manutencionHorasPosible == 0) {
+      document.getElementById("salida-cantidad-oro").textContent =  "No puedes mantener este ejercito.";
+    } else {
+      document.getElementById("salida-cantidad-oro").textContent =  "Puedes mantener este ejercito: " + manutencionHorasPosible.toLocaleString() + " horas";
+    }
+
+    var oroDiario = manutencionHorasPosible / 24;
+    var oroSemanal = oroDiario / 7;
+
+
+    var cantidadOroDiaria = document.getElementById("salida-cantidad-oro-diaria").textContent = " (" + oroDiario.toFixed(1) + " dias)";
+    var cantidadOroSemanal = document.getElementById("salida-cantidad-oro-semanal").textContent = " ("+ oroSemanal.toFixed(1) + " semanas)";
+  
+
+    var proMadera = parseInt(document.getElementById("pro-madera").value) || 0;
+    var proVino = parseInt(document.getElementById("pro-vino").value) || 0;
+    var proCristal = parseInt(document.getElementById("pro-cristal").value) || 0;
+    var proAzufre = parseInt(document.getElementById("pro-azufre").value) || 0;
+    
+    var horasNecesariasMadera = (totalMadera + total_navalMadera) / proMadera;
+    var horasNecesariasVino = totalVino / proVino;
+    var horasNecesariasCristal = (totalCristal + total_navalCristal) / proCristal;
+    var horasNecesariasAzufre = (totalAzufre + total_navalAzufre) / proAzufre;
+    
+    document.getElementById("salida-pro-madera").textContent =  "Necesitas " + Math.round(horasNecesariasMadera).toLocaleString() + " horas de produccion de madera";
+    document.getElementById("salida-pro-vino").textContent =  "Necesitas " + Math.round(horasNecesariasVino).toLocaleString() + " horas de produccion de vino";
+    document.getElementById("salida-pro-cristal").textContent =  "Necesitas " + Math.round(horasNecesariasCristal).toLocaleString() + " horas de produccion de cristal";
+    document.getElementById("salida-pro-azufre").textContent =  "Necesitas " + Math.round(horasNecesariasAzufre).toLocaleString() + " horas de produccion de azufre";
+
+      
+    
+    /************************************************************************************/
+    /************************************************************************************/
+
+    document.getElementById("total_madera").textContent =  Math.round(totalMadera).toLocaleString();
+    document.getElementById("total_vino").textContent = Math.round(totalVino).toLocaleString();
+    document.getElementById("total_cristal").textContent = Math.round(totalCristal).toLocaleString();
+    document.getElementById("total_azufre").textContent = Math.round(totalAzufre).toLocaleString();
+    document.getElementById("total_ciudadanos").textContent = Math.round(totalCiudadanos).toLocaleString();
+    document.getElementById("total_generales").textContent = Math.round(totalGenerales).toLocaleString();
+    document.getElementById("total_manutencion").textContent = Math.round(totalManutencion).toLocaleString();
+    document.getElementById("total_manutencion_dia").textContent = Math.round(totalManutencionDia).toLocaleString();
+    document.getElementById("total_manutencion_semanal").textContent = Math.round(totalManutencionSemanal).toLocaleString();
+    document.getElementById("total_peso").textContent = Math.round(totalPeso).toLocaleString();
+    document.getElementById("total_mercantes").textContent = Math.round(totalMercantes).toLocaleString();
+
+    document.getElementById("total_naval_madera").textContent =  Math.round(total_navalMadera).toLocaleString();
+    document.getElementById("total_naval_cristal").textContent = Math.round(total_navalCristal).toLocaleString();
+    document.getElementById("total_naval_azufre").textContent = Math.round(total_navalAzufre).toLocaleString();
+    document.getElementById("total_naval_ciudadanos").textContent = Math.round(total_navalCiudadanos).toLocaleString();
+    document.getElementById("total_naval_generales").textContent = Math.round(total_navalGenerales).toLocaleString();
+    document.getElementById("total_naval_manutencion").textContent = Math.round(total_navalManutencion).toLocaleString();
+    document.getElementById("total_naval_manutencion_dia").textContent = Math.round(total_navalManutencionDia).toLocaleString();
+    document.getElementById("total_naval_manutencion_semanal").textContent = Math.round(total_navalManutencionSemanal).toLocaleString();
+
+    document.getElementById("resultadoGeneral_madera").textContent = Math.round(totalMadera + total_navalMadera).toLocaleString();
+    document.getElementById("resultadoGeneral_vino").textContent = Math.round(totalVino).toLocaleString();
+    document.getElementById("resultadoGeneral_cristal").textContent = Math.round(totalCristal + total_navalCristal).toLocaleString();
+    document.getElementById("resultadoGeneral_azufre").textContent = Math.round(totalAzufre + total_navalAzufre).toLocaleString();
+    document.getElementById("resultadoGeneral_ciudadanos").textContent = Math.round(totalCiudadanos + total_navalCiudadanos).toLocaleString();
+    document.getElementById("resultadoGeneral_generales").textContent = Math.round(totalGenerales + total_navalGenerales).toLocaleString();
+    document.getElementById("resultadoGeneral_manutencion").textContent = Math.round(totalManutencion + total_navalManutencion).toLocaleString();
+    document.getElementById("resultadoGeneral_manutencion_dia").textContent = Math.round(totalManutencionDia + total_navalManutencionDia).toLocaleString();
+    document.getElementById("resultadoGeneral_manutencion_semanal").textContent = Math.round(totalManutencionSemanal + total_navalManutencionSemanal).toLocaleString();
+    document.getElementById("resultadoGeneral_peso").textContent = Math.round(totalPeso).toLocaleString();
+    document.getElementById("resultadoGeneral_mercantes").textContent = Math.round(totalMercantes).toLocaleString();
+  }
+</script>
+</body>
+</html>

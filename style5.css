@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.img-before-hondero::before {
+  background-image: url("../img/hondero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-arquero::before {
+  background-image: url("../img/arquero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-fusilero::before {
+  background-image: url("../img/fusilero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-lancero::before {
+  background-image: url("../img/lancero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-espadachin::before {
+  background-image: url("../img/espadachin.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-hoplita::before {
+  background-image: url("../img/hoplita.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-gigante::before {
+  background-image: url("../img/gigante.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-girocoptero::before {
+  background-image: url("../img/girocoptero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-globo::before {
+  background-image: url("../img/globo.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-ariete::before {
+  background-image: url("../img/ariete.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-catapulta::before {
+  background-image: url("../img/catapulta.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-mortero::before {
+  background-image: url("../img/mortero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-medico::before {
+  background-image: url("../img/medico.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-cocinero::before {
+  background-image: url("../img/cocinero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-espartano::before {
+  background-image: url("../img/espartano.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+/********************************************************/
+.img-before-espolon::before {
+  background-image: url("../img/espolon.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-ballesta::before {
+  background-image: url("../img/ballesta.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-lanzallamas::before {
+  background-image: url("../img/lanzallamas.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-vapor::before {
+  background-image: url("../img/vapor.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-barcoMortero::before {
+  background-image: url("../img/barco_mortero.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-barcoCatapulta::before {
+  background-image: url("../img/barco_catapulta.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-lanzamisiles::before {
+  background-image: url("../img/lanzamisiles.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-submarino::before {
+  background-image: url("../img/submarino.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-palas::before {
+  background-image: url("../img/palas.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-portaglobos::before {
+  background-image: url("../img/portaglobos.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+.img-before-mantenimiento::before {
+  background-image: url("../img/barco_de_mantenimiento.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  content: "";
+}
+/**********************************************************/
+body {
+  background-image: url(../img/background.jpg);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(91, 46, 2);
+}
+h4 {
+  margin-bottom: 3px;
+  text-align: center;
+  margin-top: 20px;
+}
+.input-containers input {
+  outline: none;
+  border: none;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 7px;
+  font-size: 1.1rem;
+  background-color: rgb(255, 248, 222);
+}
+.contenedor-chachi input {
+  background-color: rgb(255, 248, 222);
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.tabla {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  background: transparent;
+}
+.contenedor-tablas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tabla {
+  max-width: 900px;
+  display: flex;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+.contenedor-chachi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+}
+.contenedor-chachi2 {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  /* padding: 10px; */
+  justify-content: center;
+}
+.tabla-resultados .derecha {
+  text-align: right;
+}
+.input-containers {
+  display: flex;
+  /* align-items: center; */
+  /* width: 130px; */
+  height: 40px;
+}
+.contenedor-resultados-adicionales {
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid black;
+  width: 500px;
+  background: rgb(255, 248, 222);
+  margin: 30px auto;
+}
+footer {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.descripcion {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: justify;
+}
+.anchoFijo {
+  width: 210px;
+}
+.center {
+  text-align: center;
+}
+button {
+  padding: 2px 5px;
+  text-transform: uppercase;
+  background: rgb(255, 248, 222);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(91, 46, 2);
+  border-radius: 3px;
+  border: 1px solid rgb(91, 46, 2);
+}
